@@ -1,0 +1,60 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*' # Run workflow on version tags, e.g. v1.0.0
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+    
+    - name: Build with PyInstaller
+      run: |
+        pyinstaller --onefile --name psp-mouse-injector mohh1-mouse-injector.py
+        # Make executable
+        chmod +x dist/psp-mouse-injector
+    
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/psp-mouse-injector
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+        name: Release ${{ github.ref_name }}
+        body: |
+          ## PSP Mouse Injector ${{ github.ref_name }}
+          
+          ### Installation
+          
+          Download the appropriate executable for your platform and run it from the terminal:
+          
+          ```bash
+          chmod +x psp-mouse-injector
+          ./psp-mouse-injector
+          ```
+          
+          See the [README.md](https://github.com/${{ github.repository }}/blob/main/README.md) for full usage instructions.
+          
+          ### Changes in this version:
+          
+          <!-- Describe changes here -->
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
