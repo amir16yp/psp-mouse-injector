@@ -7,6 +7,10 @@ on:
     pull_request:
         branches: [ main ]
     workflow_dispatch:
+
+permissions:
+    contents: write
+
 jobs:
     build-linux:
         runs-on: ubuntu-latest
@@ -41,5 +45,3 @@ jobs:
           with:
               files: dist/psp-mouse-injector
               tag_name: ${{ github.event.release.tag_name }}
-          env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
