@@ -9,9 +9,6 @@ A mouse-to-gamepad injector for PPSSPP emulator, designed to enable native mouse
 
 - Real-time mouse movement injection into PPSSPP emulator
 - Automatic detection of different PPSSPP variants (SDL, Qt) (qt seems broken rn)
-- Adjustable mouse sensitivity
-- Option to invert mouse Y-axis
-- Auto-detection of game memory layout
 
 ## Installation
 
