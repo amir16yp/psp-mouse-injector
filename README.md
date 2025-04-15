@@ -96,4 +96,4 @@ This project is licensed under the GNU GPLv2 License - see the [LICENSE](LICENSE
 
 ## Acknowledgments
 
-- Based on the original [Mouse Injector for Dolphin](https://github.com/Carnivorous19/dolphin-mouse-injector) by Carnivorous 
+- Got the offsets from a [https://github.com/MOW531/MouseInjectorDolphinDuck/](MouseInjectorDolphinDuck) fork, credits to him for finding them
