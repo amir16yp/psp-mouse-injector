@@ -1,13 +1,12 @@
 name: Build and Test
 on:
+    release:
+        types: [created, published]
     push:
         branches: [ main ]
-        tags:
-            - 'v*'  # Push events to matching v*, i.e. v1.0, v20.15.10
     pull_request:
         branches: [ main ]
     workflow_dispatch:
-
 jobs:
     build-linux:
         runs-on: ubuntu-latest
@@ -36,14 +35,11 @@ jobs:
               path: dist/psp-mouse-injector
               if-no-files-found: error
         
-        - name: Create Release
-          id: create_release
-          if: startsWith(github.ref, 'refs/tags/')
+        - name: Upload to Release
+          if: github.event_name == 'release'
           uses: softprops/action-gh-release@v1
           with:
               files: dist/psp-mouse-injector
-              draft: false
-              prerelease: false
-              generate_release_notes: true
+              tag_name: ${{ github.event.release.tag_name }}
           env:
               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
