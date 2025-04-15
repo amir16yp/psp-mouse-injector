@@ -49,7 +49,7 @@ Download the latest release from the [Releases](https://github.com/username/psp-
 
 2. In a terminal, run the injector:
    ```bash
-   python test-mouse-injection.py
+   python mohh1-mouse-injector.py
    ```
 
 3. The injector will automatically detect the PPSSPP process, find the game's memory, and start injecting mouse movements.
@@ -81,7 +81,7 @@ To build a standalone executable:
 
 ```bash
 pip install pyinstaller
-pyinstaller --onefile --name psp-mouse-injector test-mouse-injection.py
+pyinstaller --onefile --name psp-mouse-injector mohh1-mouse-injector.py
 ```
 
 The executable will be created in the `dist` directory.
